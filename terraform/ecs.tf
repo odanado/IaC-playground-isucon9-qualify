@@ -25,3 +25,14 @@ resource "aws_ecs_task_definition" "webapp" {
     }
   ])
 }
+/*
+resource "aws_ecs_service" "this" {
+  name = "webapp"
+
+  cluster         = aws_ecs_cluster.webapp.name
+  task_definition = aws_ecs_task_definition.webapp.arn
+
+  launch_type   = "FARGATE"
+  desired_count = 1
+}
+*/
