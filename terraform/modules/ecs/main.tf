@@ -1,9 +1,9 @@
 resource "aws_ecs_cluster" "webapp" {
-  name = "isucon9-qualify"
+  name = var.name
 }
 
 resource "aws_ecs_task_definition" "webapp" {
-  family                   = "isucon9-qualify"
+  family                   = var.name
   requires_compatibilities = ["FARGATE"]
 
   cpu    = "256"
@@ -14,7 +14,7 @@ resource "aws_ecs_task_definition" "webapp" {
   container_definitions = jsonencode([
     {
       "name" : "example",
-      "image" : "nginx:latest",
+      "image" : var.webapp_image,
       "essential" : true,
       "portMappings" : [
         {
@@ -25,14 +25,3 @@ resource "aws_ecs_task_definition" "webapp" {
     }
   ])
 }
-/*
-resource "aws_ecs_service" "this" {
-  name = "webapp"
-
-  cluster         = aws_ecs_cluster.webapp.name
-  task_definition = aws_ecs_task_definition.webapp.arn
-
-  launch_type   = "FARGATE"
-  desired_count = 1
-}
-*/

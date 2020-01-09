@@ -1,6 +1,7 @@
 locals {
+  name = "isucon9-qualify"
   tags = {
-    Name      = "isucon9-qualify"
+    Name      = local.name
     Terraform = "true"
   }
 }

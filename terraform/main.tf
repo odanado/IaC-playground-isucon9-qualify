@@ -5,6 +5,14 @@ provider "aws" {
 module "vpc" {
   source = "./modules/vpc"
 
-  name = "isucon9-qualify"
+  name = local.name
+
   tags = local.tags
+}
+
+module "ecs" {
+  source = "./modules/ecs"
+
+  name         = local.name
+  webapp_image = "nginx:latest"
 }
